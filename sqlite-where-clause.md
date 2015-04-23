@@ -10,7 +10,7 @@ WHERE 子句不仅可用在 SELECT 语句中，它也可用在 UPDATE、DELETE �
 ## 语法
 SQLite 的带有 WHERE 子句的 SELECT 语句的基本语法如下：
 
-``
+```
     SELECT column1, column2, columnN
     FROM table_name
     WHERE [condition]
