@@ -2,8 +2,10 @@
 
 SQLite 是遵循一套独特的称为语法的规则和准则。本教程列出了所有基本的 SQLite 语法，向您提供了一个 SQLite 快速入门。
 
+## 大小写敏感性
 有个重要的点值得注意，SQLite 是**不区分大小写**的，但也有一些命令是大小写敏感的，比如 **GLOB** 和 **glob** 在 SQLite 的语句中有不同的含义。
 
+## 注释
 SQLite 注释是附加的注释，可以在 SQLite 代码中添加注释以增加其可读性，他们可以出现在任何空白处，包括在表达式内和其他 SQL 语句的中间，但它们不能嵌套。
 
 SQL 注释以两个连续的 "-" 字符（ASCII 0x2d）开始，并扩展至下一个换行符（ASCII 0x0a）或直到输入结束，以先到者为准。
@@ -32,6 +34,7 @@ SQL 注释以两个连续的 "-" 字符（ASCII 0x2d）开始，并扩展至下�
     FROM   table_name
     WHERE  CONDITION-1 {AND|OR} CONDITION-2;
 ```
+
 ## SQLite ALTER TABLE 语句：
 
 ```
