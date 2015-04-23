@@ -78,6 +78,7 @@ SQLite的 **UNION** 子句/运算符用于合并两个或多个 SELECT 语句的
     7           James                 Finance
 ```
 
+## UNION ALL 子句
 UNION ALL 运算符用于结合两个 SELECT 语句的结果，包括重复行。
 
 适用于 UNION 的规则同样适用于 UNION ALL 运算符。
