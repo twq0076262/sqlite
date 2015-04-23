@@ -12,6 +12,7 @@
 
 SQLite 视图是只读的，因此可能无法在视图上执行 DELETE、INSERT 或 UPDATE 语句。但是可以在视图上创建一个触发器，当尝试 DELETE、INSERT 或 UPDATE 视图时触发，需要做的动作在触发器内容中定义。
 
+## 创建视图
 SQLite 的视图是使用 **CREATE VIEW** 语句创建的。SQLite 视图可以从一个单一的表、多个表或其他视图创建。
 
 CREATE VIEW 的基本语法如下：
@@ -69,6 +70,7 @@ CREATE VIEW 的基本语法如下：
     7           James       24
 ```
 
+## 删除视图
 要删除视图，只需使用带有 **view_name** 的 DROP VIEW 语句。DROP VIEW 的基本语法如下：
 
 ```
