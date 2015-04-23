@@ -3,6 +3,7 @@
 
 SQLite 的 **LIMIT** 子句用于限制由 SELECT 语句返回的数据数量。
 
+## 语法
 带有 LIMIT 子句的 SELECT 语句的基本语法如下：
 
 ```
@@ -21,6 +22,7 @@ SQLite 的 **LIMIT** 子句用于限制由 SELECT 语句返回的数据数量。
 
 SQLite 引擎将返回从下一行开始直到给定的 OFFSET 为止的所有行，如下面的最后一个实例所示。
 
+## 实例
 假设 COMPANY 表有以下记录：
 
 ```
