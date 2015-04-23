@@ -2,6 +2,7 @@
 
 SQLite 的 **CREATE TABLE** 语句用于在任何给定的数据库创建一个新表。创建基本表，涉及到命名表、定义列及每一列的数据类型。
 
+## 语法
 CREATE TABLE 语句的基本语法如下：
 
 ```
@@ -16,6 +17,7 @@ CREATE TABLE 语句的基本语法如下：
 
 CREATE TABLE 是告诉数据库系统创建一个新表的关键字。CREATE TABLE 语句后跟着表的唯一的名称或标识。您也可以选择指定带有 _table_name_ 的 _ database_name_。
 
+## 实例
 下面是一个实例，它创建了一个 COMPANY 表，ID 作为主键，NOT NULL 的约束表示在表中创建纪录时这些字段不能为 NULL：
 
 ```
