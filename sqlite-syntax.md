@@ -15,6 +15,8 @@ SQL 注释以两个连续的 "-" 字符（ASCII 0x2d）开始，并扩展至下�
 ```
     sqlite>.help -- This is a single line comment
 ```
+
+## SQLite 语句
 所有的 SQLite 语句可以以任何关键字开始，如 SELECT、INSERT、UPDATE、DELETE、ALTER、DROP 等，所有的语句以分号（;）结束。
 
 ## SQLite ANALYZE 语句：
