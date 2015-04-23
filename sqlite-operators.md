@@ -1,5 +1,6 @@
 # SQLite 运算符
 
+## SQLite 运算符是什么？
 运算符是一个保留字或字符，主要用于 SQLite 语句的 WHERE 子句中执行操作，如比较和算术运算。
 
 运算符用于指定 SQLite 语句中的条件，并在语句中连接多个条件。
@@ -9,6 +10,7 @@
 * 逻辑运算符
 * 位运算符
 
+## SQLite 算术运算符
 假设变量 a=10，变量 b=20，则：
 
 </p> <table > <tbody><tr> <th style="width:20%">运算符</th><th style="width:45%">描述</th><th>实例</th> </tr> <tr> <td>+</td><td>加法 - 把运算符两边的值相加</td><td> a + b 将得到 30</td> </tr> <tr> <td>-</td><td>减法 - 左操作数减去右操作数</td><td> a - b 将得到 -10</td> </tr> <tr> <td>*</td><td>乘法 - 把运算符两边的值相乘</td><td> a * b 将得到 200</td> </tr> <tr> <td>/</td><td>除法 - 左操作数除以右操作数</td><td> b / a 将得到 2</td> </tr> <tr> <td>%</td><td>取模 - 左操作数除以右操作数后得到的余数</td><td> b % a will give 0</td> </tr> </tbody></table> 
