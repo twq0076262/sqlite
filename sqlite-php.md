@@ -20,16 +20,21 @@ Windows 用户必须启用 php_sqlite3.dll 才能使用该扩展。自 PHP 5.3.0
 下面的 PHP 代码显示了如何连接到一个现有的数据库。如果数据库不存在，那么它就会被创建，最后将返回一个数据库对象。
 
 ```
-    open('test.db');
-          }
-       }
-       $db = new MyDB();
-       if(!$db){
-          echo $db->lastErrorMsg();
-       } else {
-          echo "Opened database successfullyn";
-       }
-    ?>
+<?php
+   class MyDB extends SQLite3
+   {
+      function __construct()
+      {
+         $this->open('test.db');
+      }
+   }
+   $db = new MyDB();
+   if(!$db){
+      echo $db->lastErrorMsg();
+   } else {
+      echo "Opened database successfully\n";
+   }
+?>
 ```
 
 现在，让我们来运行上面的程序，在当前目录中创建我们的数据库 **test.db**。您可以根据需要改变路径。如果数据库成功创建，那么会显示下面所示的消息：
@@ -43,24 +48,38 @@ Windows 用户必须启用 php_sqlite3.dll 才能使用该扩展。自 PHP 5.3.0
 下面的 PHP 代码段将用于在先前创建的数据库中创建一个表：
 
 ```
-    open('test.db');
-          }
-       }
-       $db = new MyDB();
-       if(!$db){
-          echo $db->lastErrorMsg();
-       } else {
-          echo "Opened database successfullyn";
-       }
+  <?php
+   class MyDB extends SQLite3
+   {
+      function __construct()
+      {
+         $this->open('test.db');
+      }
+   }
+   $db = new MyDB();
+   if(!$db){
+      echo $db->lastErrorMsg();
+   } else {
+      echo "Opened database successfully\n";
+   }
 
-       $sql =<<exec($sql);
-       if(!$ret){
-          echo $db->lastErrorMsg();
-       } else {
-          echo "Table created successfullyn";
-       }
-       $db->close();
-    ?>
+   $sql =<<<EOF
+      CREATE TABLE COMPANY
+      (ID INT PRIMARY KEY     NOT NULL,
+      NAME           TEXT    NOT NULL,
+      AGE            INT     NOT NULL,
+      ADDRESS        CHAR(50),
+      SALARY         REAL);
+EOF;
+
+   $ret = $db->exec($sql);
+   if(!$ret){
+      echo $db->lastErrorMsg();
+   } else {
+      echo "Table created successfully\n";
+   }
+   $db->close();
+?>
 ```
 
 上述程序执行时，它会在 **test.db** 中创建 COMPANY 表，并显示下面所示的消息：
@@ -75,24 +94,43 @@ Windows 用户必须启用 php_sqlite3.dll 才能使用该扩展。自 PHP 5.3.0
 下面的 PHP 程序显示了如何在上面创建的 COMPANY 表中创建记录：
 
 ```
-    open('test.db');
-          }
-       }
-       $db = new MyDB();
-       if(!$db){
-          echo $db->lastErrorMsg();
-       } else {
-          echo "Opened database successfullyn";
-       }
+<?php
+   class MyDB extends SQLite3
+   {
+      function __construct()
+      {
+         $this->open('test.db');
+      }
+   }
+   $db = new MyDB();
+   if(!$db){
+      echo $db->lastErrorMsg();
+   } else {
+      echo "Opened database successfully\n";
+   }
 
-       $sql =<<exec($sql);
-       if(!$ret){
-          echo $db->lastErrorMsg();
-       } else {
-          echo "Records created successfullyn";
-       }
-       $db->close();
-    ?>
+   $sql =<<<EOF
+      INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY)
+      VALUES (1, 'Paul', 32, 'California', 20000.00 );
+
+      INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY)
+      VALUES (2, 'Allen', 25, 'Texas', 15000.00 );
+
+      INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY)
+      VALUES (3, 'Teddy', 23, 'Norway', 20000.00 );
+
+      INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY)
+      VALUES (4, 'Mark', 25, 'Rich-Mond ', 65000.00 );
+EOF;
+
+   $ret = $db->exec($sql);
+   if(!$ret){
+      echo $db->lastErrorMsg();
+   } else {
+      echo "Records created successfully\n";
+   }
+   $db->close();
+?>
 ```
 
 上述程序执行时，它会在 COMPANY 表中创建给定记录，并会显示以下两行：
@@ -107,26 +145,35 @@ Windows 用户必须启用 php_sqlite3.dll 才能使用该扩展。自 PHP 5.3.0
 下面的 PHP 程序显示了如何从前面创建的 COMPANY 表中获取并显示记录：
 
 ```
-    open('test.db');
-          }
-       }
-       $db = new MyDB();
-       if(!$db){
-          echo $db->lastErrorMsg();
-       } else {
-          echo "Opened database successfullyn";
-       }
+<?php
+   class MyDB extends SQLite3
+   {
+      function __construct()
+      {
+         $this->open('test.db');
+      }
+   }
+   $db = new MyDB();
+   if(!$db){
+      echo $db->lastErrorMsg();
+   } else {
+      echo "Opened database successfully\n";
+   }
 
-       $sql =<<query($sql);
-       while($row = $ret->fetchArray(SQLITE3_ASSOC) ){
-          echo "ID = ". $row['ID'] . "n";
-          echo "NAME = ". $row['NAME'] ."n";
-          echo "ADDRESS = ". $row['ADDRESS'] ."n";
-          echo "SALARY =  ".$row['SALARY'] ."nn";
-       }
-       echo "Operation done successfullyn";
-       $db->close();
-    ?>
+   $sql =<<<EOF
+      SELECT * from COMPANY;
+EOF;
+
+   $ret = $db->query($sql);
+   while($row = $ret->fetchArray(SQLITE3_ASSOC) ){
+      echo "ID = ". $row['ID'] . "\n";
+      echo "NAME = ". $row['NAME'] ."\n";
+      echo "ADDRESS = ". $row['ADDRESS'] ."\n";
+      echo "SALARY =  ".$row['SALARY'] ."\n\n";
+   }
+   echo "Operation done successfully\n";
+   $db->close();
+?>
 ```
 
 上述程序执行时，它会产生以下结果：
@@ -161,32 +208,43 @@ Windows 用户必须启用 php_sqlite3.dll 才能使用该扩展。自 PHP 5.3.0
 下面的 PHP 代码显示了如何使用 UPDATE 语句来更新任何记录，然后从 COMPANY 表中获取并显示更新的记录：
 
 ```
-    open('test.db');
-          }
-       }
-       $db = new MyDB();
-       if(!$db){
-          echo $db->lastErrorMsg();
-       } else {
-          echo "Opened database successfullyn";
-       }
-       $sql =<<exec($sql);
-       if(!$ret){
-          echo $db->lastErrorMsg();
-       } else {
-          echo $db->changes(), " Record updated successfullyn";
-       }
+<?php
+   class MyDB extends SQLite3
+   {
+      function __construct()
+      {
+         $this->open('test.db');
+      }
+   }
+   $db = new MyDB();
+   if(!$db){
+      echo $db->lastErrorMsg();
+   } else {
+      echo "Opened database successfully\n";
+   }
+   $sql =<<<EOF
+      UPDATE COMPANY set SALARY = 25000.00 where ID=1;
+EOF;
+   $ret = $db->exec($sql);
+   if(!$ret){
+      echo $db->lastErrorMsg();
+   } else {
+      echo $db->changes(), " Record updated successfully\n";
+   }
 
-       $sql =<<query($sql);
-       while($row = $ret->fetchArray(SQLITE3_ASSOC) ){
-          echo "ID = ". $row['ID'] . "n";
-          echo "NAME = ". $row['NAME'] ."n";
-          echo "ADDRESS = ". $row['ADDRESS'] ."n";
-          echo "SALARY =  ".$row['SALARY'] ."nn";
-       }
-       echo "Operation done successfullyn";
-       $db->close();
-    ?>
+   $sql =<<<EOF
+      SELECT * from COMPANY;
+EOF;
+   $ret = $db->query($sql);
+   while($row = $ret->fetchArray(SQLITE3_ASSOC) ){
+      echo "ID = ". $row['ID'] . "\n";
+      echo "NAME = ". $row['NAME'] ."\n";
+      echo "ADDRESS = ". $row['ADDRESS'] ."\n";
+      echo "SALARY =  ".$row['SALARY'] ."\n\n";
+   }
+   echo "Operation done successfully\n";
+   $db->close();
+?>
 ```
 
 上述程序执行时，它会产生以下结果：
@@ -222,32 +280,43 @@ Windows 用户必须启用 php_sqlite3.dll 才能使用该扩展。自 PHP 5.3.0
 下面的 PHP 代码显示了如何使用 DELETE 语句删除任何记录，然后从 COMPANY 表中获取并显示剩余的记录：
 
 ```
-    open('test.db');
-          }
-       }
-       $db = new MyDB();
-       if(!$db){
-          echo $db->lastErrorMsg();
-       } else {
-          echo "Opened database successfullyn";
-       }
-       $sql =<<exec($sql);
-       if(!$ret){
-         echo $db->lastErrorMsg();
-       } else {
-          echo $db->changes(), " Record deleted successfullyn";
-       }
+  <?php
+   class MyDB extends SQLite3
+   {
+      function __construct()
+      {
+         $this->open('test.db');
+      }
+   }
+   $db = new MyDB();
+   if(!$db){
+      echo $db->lastErrorMsg();
+   } else {
+      echo "Opened database successfully\n";
+   }
+   $sql =<<<EOF
+      DELETE from COMPANY where ID=2;
+EOF;
+   $ret = $db->exec($sql);
+   if(!$ret){
+     echo $db->lastErrorMsg();
+   } else {
+      echo $db->changes(), " Record deleted successfully\n";
+   }
 
-       $sql =<<query($sql);
-       while($row = $ret->fetchArray(SQLITE3_ASSOC) ){
-          echo "ID = ". $row['ID'] . "n";
-          echo "NAME = ". $row['NAME'] ."n";
-          echo "ADDRESS = ". $row['ADDRESS'] ."n";
-          echo "SALARY =  ".$row['SALARY'] ."nn";
-       }
-       echo "Operation done successfullyn";
-       $db->close();
-    ?>
+   $sql =<<<EOF
+      SELECT * from COMPANY;
+EOF;
+   $ret = $db->query($sql);
+   while($row = $ret->fetchArray(SQLITE3_ASSOC) ){
+      echo "ID = ". $row['ID'] . "\n";
+      echo "NAME = ". $row['NAME'] ."\n";
+      echo "ADDRESS = ". $row['ADDRESS'] ."\n";
+      echo "SALARY =  ".$row['SALARY'] ."\n\n";
+   }
+   echo "Operation done successfully\n";
+   $db->close();
+?>
 ```
 
 上述程序执行时，它会产生以下结果：
