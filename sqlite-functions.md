@@ -135,7 +135,7 @@ SQLite ABS 函数返回数值参数的绝对值。下面是实例：
 SQLite UPPER 函数把字符串转换为大写字母。下面是实例：
 
 ```
-    sql    ite> SELECT upper(name) FROM COMPANY;
+    sqlite> SELECT upper(name) FROM COMPANY;
 ```
 
 上面的 SQLite SQL 语句将产生以下结果：
