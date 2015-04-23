@@ -5,6 +5,7 @@ SQLite的 **DETACH DTABASE** 语句是用来把命名数据库从一个数据库
 
 > 如果数据库是在内存中或者是临时数据库，则该数据库将被摧毁，且内容将会丢失。
 
+## 语法
 SQLite 的 DETACH DATABASE 'Alias-Name' 语句的基本语法如下：
 
 ```
@@ -12,6 +13,7 @@ SQLite 的 DETACH DATABASE 'Alias-Name' 语句的基本语法如下：
 ```
 在这里，'Alias-Name' 与您之前使用 ATTACH 语句附加数据库时所用到的别名相同。
 
+## 实例
 假设在前面的章节中您已经创建了一个数据库，并给它附加了 'test' 和 'currentDB'，使用 .database 命令，我们可以看到：
 
 ```
