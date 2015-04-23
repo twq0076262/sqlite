@@ -4,6 +4,7 @@ SQLite 的 **AND** 和 **OR** 运算符用于编译多个条件来缩小在 SQLi
 
 这些运算符为同一个 SQLite 语句中不同的运算符之间的多个比较提供了可能。
 
+## AND 运算符
 **AND** 运算符允许在一个 SQL 语句的 WHERE 子句中的多个条件的存在。使用 AND 运算符时，只有当所有条件都为真（true）时，整个条件为真（true）。例如，只有当 condition1 和 condition2 都为真（true）时，[condition1] AND [condition2] 为真（true）。
 
 ## 语法
